@@ -1,6 +1,10 @@
 import { DateTime } from 'luxon'
 
-export interface DepartureDTO {
+export interface DeparturesDTO {
+  flights: DepartureFlightDTO[]
+}
+
+export interface DepartureFlightDTO {
   airlineName: string // Ex: Wideroe
   flightId: string // Ex: WF769
 
@@ -17,7 +21,7 @@ export interface DepartureDTO {
   status: string | null // TODO
 }
 
-export interface Departure {
+export interface DepartureFlight {
   airlineName: string
   flightId: string
 
@@ -27,6 +31,6 @@ export interface Departure {
   toAirportName: string
 
   gate: string
-  hasDeparted: false
+  hasDeparted: boolean
   departureDate: DateTime
 }
