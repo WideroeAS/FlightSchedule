@@ -21,7 +21,7 @@ export interface DepartureFlightDTO {
   status: string | null // TODO
 }
 
-export interface DepartureFlight {
+export interface Departure {
   airlineName: string
   flightId: string
 

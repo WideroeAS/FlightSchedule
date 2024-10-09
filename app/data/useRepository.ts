@@ -1,12 +1,12 @@
-import { DepartureFlight, DepartureFlightDTO, DeparturesDTO } from '@/app/data/models'
+import { Departure, DepartureFlightDTO, DeparturesDTO } from '@/app/data/models'
 import { DateTime } from 'luxon'
 
 export interface Repository {
-  getDepartures: (airport: string) => Promise<DepartureFlight[]>
+  getDepartures: (airport: string) => Promise<Departure[]>
 }
 
 export const useRepository = (): Repository => {
-  const mapDepartureToDomain = (dto: DepartureFlightDTO): DepartureFlight => {
+  const mapDepartureToDomain = (dto: DepartureFlightDTO): Departure => {
     return {
       airlineName: dto.airlineName,
       flightId: dto.flightId,
@@ -22,7 +22,7 @@ export const useRepository = (): Repository => {
     }
   }
 
-  const getDepartures = async (airport: string): Promise<DepartureFlight[]> => {
+  const getDepartures = async (airport: string): Promise<Departure[]> => {
     const today = DateTime.now()
     const tomorrow = today.plus({ day: 1 })
     const start = `${today.toISODate()}T22:00:00Z`
