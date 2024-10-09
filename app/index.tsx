@@ -1,7 +1,7 @@
-import {Text} from 'react-native';
+import { Text } from 'react-native'
 
 export default function HomeScreen() {
-    return (
-        <Text>Flight table app</Text>
-    );
+  return (
+    <Text>Flight table app</Text>
+  )
 }
