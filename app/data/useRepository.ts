@@ -2,7 +2,7 @@ import { DepartureFlight, DepartureFlightDTO, DeparturesDTO } from '@/app/data/m
 import { DateTime } from 'luxon'
 
 export interface Repository {
-  getDepartures: () => Promise<DepartureFlight[]>
+  getDepartures: (airport: string) => Promise<DepartureFlight[]>
 }
 
 export const useRepository = (): Repository => {
@@ -22,17 +22,22 @@ export const useRepository = (): Repository => {
     }
   }
 
-  const getDepartures = async (): Promise<DepartureFlight[]> => {
-    const airport = 'BOO'
+  const getDepartures = async (airport: string): Promise<DepartureFlight[]> => {
+    const today = DateTime.now()
+    const tomorrow = today.plus({ day: 1 })
+    const start = `${today.toISODate()}T22:00:00Z`
+    const end = `${tomorrow.toISODate()}T21:59:59Z`
+
     const params = new URLSearchParams({
       direction: 'd',
-      start: '2024-10-08T22:00:00Z',
-      end: '2024-10-09T21:59:59Z',
+      start,
+      end,
       language: 'no',
     })
     const path = `Api/Flights/Airport/${airport}?${params.toString()}`
     const host = 'https://avinor.no'
     const url = new URL(path, host)
+
     const result = await fetch(url)
 
     const departureResult = await result.json() as DeparturesDTO
