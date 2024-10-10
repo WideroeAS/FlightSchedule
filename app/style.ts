@@ -1,8 +1,8 @@
 const style = {
   space: 8,
   card: {
-    backgroundColor: 'gray',
-    borderRadius: 16,
+    backgroundColor: 'white',
+    borderRadius: 8,
   },
 }
 
