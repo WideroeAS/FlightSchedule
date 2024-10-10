@@ -1,0 +1,178 @@
+[
+  {
+    "name": "Alta lufthavn",
+    "iata": "ALF"
+  },
+  {
+    "name": "Andøya lufthavn, Andenes",
+    "iata": "ANX"
+  },
+  {
+    "name": "Bardufoss lufthavn",
+    "iata": "BDU"
+  },
+  {
+    "name": "Bergen lufthavn, Flesland",
+    "iata": "BGO"
+  },
+  {
+    "name": "Berlevåg lufthavn",
+    "iata": "BVG"
+  },
+  {
+    "name": "Bodø lufthavn",
+    "iata": "BOO"
+  },
+  {
+    "name": "Brønnøysund lufthavn, Brønnøy",
+    "iata": "BNN"
+  },
+  {
+    "name": "Båtsfjord lufthavn",
+    "iata": "BJF"
+  },
+  {
+    "name": "Fagernes lufthavn, Leirin",
+    "iata": "VDB"
+  },
+  {
+    "name": "Florø lufthamn",
+    "iata": "FRO"
+  },
+  {
+    "name": "Førde lufthamn, Bringeland",
+    "iata": "FDE"
+  },
+  {
+    "name": "Hammerfest lufthavn",
+    "iata": "HFT"
+  },
+  {
+    "name": "Harstad/Narvik lufthavn, Evenes",
+    "iata": "EVE"
+  },
+  {
+    "name": "Hasvik lufthavn",
+    "iata": "HAA"
+  },
+  {
+    "name": "Honningsvåg lufthavn",
+    "iata": "HVG"
+  },
+  {
+    "name": "Kirkenes lufthavn, Høybuktmoen",
+    "iata": "KKN"
+  },
+  {
+    "name": "Kristiansand lufthavn, Kjevik",
+    "iata": "KRS"
+  },
+  {
+    "name": "Kristiansund lufthavn, Kvernberget",
+    "iata": "KSU"
+  },
+  {
+    "name": "Lakselv lufthavn, Banak",
+    "iata": "LKL"
+  },
+  {
+    "name": "Leknes lufthavn",
+    "iata": "LKN"
+  },
+  {
+    "name": "Mehamn lufthavn",
+    "iata": "MEH"
+  },
+  {
+    "name": "Mo i Rana lufthavn, Røssvoll",
+    "iata": "MQN"
+  },
+  {
+    "name": "Molde lufthavn, Årø",
+    "iata": "MOL"
+  },
+  {
+    "name": "Mosjøen lufthavn, Kjærstad",
+    "iata": "MJF"
+  },
+  {
+    "name": "Namsos lufthavn",
+    "iata": "OSY"
+  },
+  {
+    "name": "Oslo lufthavn",
+    "iata": "OSL"
+  },
+  {
+    "name": "Røros lufthavn",
+    "iata": "RRS"
+  },
+  {
+    "name": "Rørvik lufthavn, Ryum",
+    "iata": "RVK"
+  },
+  {
+    "name": "Røst lufthavn",
+    "iata": "RET"
+  },
+  {
+    "name": "Sandane lufthamn, Anda",
+    "iata": "SDN"
+  },
+  {
+    "name": "Sandnessjøen lufthavn, Stokka",
+    "iata": "SSJ"
+  },
+  {
+    "name": "Sogndal lufthamn, Haukåsen",
+    "iata": "SOG"
+  },
+  {
+    "name": "Stavanger lufthavn, Sola",
+    "iata": "SVG"
+  },
+  {
+    "name": "Stokmarknes lufthavn, Skagen",
+    "iata": "SKN"
+  },
+  {
+    "name": "Svalbard lufthavn, Longyear",
+    "iata": "LYR"
+  },
+  {
+    "name": "Svolvær lufthavn, Helle",
+    "iata": "SVJ"
+  },
+  {
+    "name": "Sørkjosen lufthavn",
+    "iata": "SOJ"
+  },
+  {
+    "name": "Tromsø lufthavn",
+    "iata": "TOS"
+  },
+  {
+    "name": "Trondheim lufthavn, Værnes",
+    "iata": "TRD"
+  },
+  {
+    "name": "Vadsø lufthavn",
+    "iata": "VDS"
+  },
+  {
+    "name": "Vardø lufthavn, Svartnes",
+    "iata": "VAW"
+  },
+  {
+    "name": "Værøy helikopterhavn",
+    "iata": "VRY"
+  },
+  {
+    "name": "Ørsta/Volda lufthamn, Hovden",
+    "iata": "HOV"
+  },
+  {
+    "name": "Ålesund lufthavn, Vigra",
+    "iata": "AES"
+  }
+]

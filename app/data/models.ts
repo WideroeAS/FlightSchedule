@@ -34,3 +34,8 @@ export interface Departure {
   hasDeparted: boolean
   departureDate: DateTime
 }
+
+export interface Airport {
+  name: string
+  iata: string
+}

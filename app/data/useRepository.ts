@@ -1,8 +1,10 @@
-import { Departure, DepartureFlightDTO, DeparturesDTO } from '@/app/data/models'
+import { Airport, Departure, DepartureFlightDTO, DeparturesDTO } from '@/app/data/models'
 import { DateTime } from 'luxon'
+import airports from '@/app/data/airports.json'
 
 export interface Repository {
   getDepartures: (airport: string) => Promise<Departure[]>
+  getAirports: () => Airport[]
 }
 
 export const useRepository = (): Repository => {
@@ -46,5 +48,6 @@ export const useRepository = (): Repository => {
 
   return {
     getDepartures,
+    getAirports: (): Airport[] => airports,
   }
 }
