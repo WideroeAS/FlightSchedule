@@ -14,9 +14,11 @@ const Home = (): JSX.Element => {
   }, [])
 
   const departureItems = useMemo(() => {
-    return departures.map((departure, index) => {
-      return <DepartureCard key={index} departure={departure} />
-    })
+    return departures
+      .filter(departure => !departure.hasDeparted)
+      .map((departure, index) => {
+        return <DepartureCard key={index} departure={departure} />
+      })
   }, [departures])
 
   return (

@@ -24,9 +24,9 @@ export const useRepository = (): Repository => {
 
   const getDepartures = async (airport: string): Promise<Departure[]> => {
     const today = DateTime.now()
-    const tomorrow = today.plus({ day: 1 })
-    const start = `${today.toISODate()}T22:00:00Z`
-    const end = `${tomorrow.toISODate()}T21:59:59Z`
+    const yesterday = today.minus({ day: 1 })
+    const start = `${yesterday.toISODate()}T22:00:00Z`
+    const end = `${today.toISODate()}T21:59:59Z`
 
     const params = new URLSearchParams({
       direction: 'd',
