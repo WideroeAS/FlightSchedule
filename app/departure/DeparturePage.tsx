@@ -7,7 +7,7 @@ import Credit from './components/Credit'
 
 const DeparturePage = (): JSX.Element => {
   return (
-    <Text style={{ fontSize: 32 }}>Hello world 👋</Text>
+    <Text style={{ margin: 16, fontSize: 32 }}>Hello 👋</Text>
   )
 }
 

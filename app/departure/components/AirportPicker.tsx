@@ -12,9 +12,9 @@ const AirportPicker = (): JSX.Element => {
       selectedValue={controller.selectedAirportIata}
       onValueChange={controller.setSelectedAirportIata}
     >
-      {controller.airports.map((airport, index) => (
-        <Picker.Item key={index} label={airport.name} value={airport.iata} />
-      ))}
+      {/*{controller.airports.map((airport, index) => (*/}
+      {/*  <Picker.Item key={index} label={airport.name} value={airport.iata} />*/}
+      {/*))}*/}
     </Picker>
   )
 }

@@ -9,13 +9,13 @@ const DepartureList = (): JSX.Element => {
 
   return (
     <View style={{ backgroundColor: 'grey', flex: 1 }}>
-      {controller.loading && <ActivityIndicator size={'large'} />}
-      <FlatList
-        style={{ margin: 8 }}
-        ItemSeparatorComponent={() => <View style={{ margin: 4 }} />}
-        data={controller.departures}
-        renderItem={departure => <DepartureCard departure={departure.item} />}
-      />
+      {/*{controller.loading && <ActivityIndicator size={'large'} />}*/}
+      {/*<FlatList*/}
+      {/*  style={{ margin: 8 }}*/}
+      {/*  data={controller.departures}*/}
+      {/*  renderItem={departure => <DepartureCard departure={departure.item} />}*/}
+      {/*  ItemSeparatorComponent={() => <View style={{ margin: 4 }} />}*/}
+      {/*/>*/}
     </View>
   )
 }
