@@ -1,24 +1,21 @@
-import { JSX, useMemo } from 'react'
+import { JSX } from 'react'
 import DepartureCard from './DepartureCard'
-import { ScrollView, View } from 'react-native'
-import style from '../../style'
+import { FlatList, View } from 'react-native'
 import { useDepartureControllerContext } from '../DepartureController'
 import { ActivityIndicator } from 'react-native'
 
 const DepartureList = (): JSX.Element => {
   const controller = useDepartureControllerContext()
 
-  const departureItems = useMemo(() => {
-    return controller.departures
-      .filter(departure => !departure.hasDeparted)
-      .map((departure, index) => <DepartureCard key={index} departure={departure} />)
-  }, [controller.departures])
-
   return (
-    <ScrollView style={{ backgroundColor: 'grey' }}>
+    <View style={{ backgroundColor: 'grey', flex: 1 }}>
       {controller.loading && <ActivityIndicator size={'large'} />}
-      <View style={{ margin: style.space, gap: style.space }}>{departureItems}</View>
-    </ScrollView>
+      <FlatList
+        ItemSeparatorComponent={() => <View style={{ margin: 4 }} />}
+        data={controller.departures.filter(departure => !departure.hasDeparted)}
+        renderItem={item => <DepartureCard departure={item.item} />}
+      />
+    </View>
   )
 }
 
