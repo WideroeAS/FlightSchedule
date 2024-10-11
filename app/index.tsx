@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator()
 
 const App = (): JSX.Element => (
   <Stack.Navigator>
-    <Stack.Screen name='Flight schedule' component={DeparturePage} />
+    <Stack.Screen name='Untitled app' component={DeparturePage} />
   </Stack.Navigator>
 )
 export default App

@@ -1,16 +1,13 @@
 import { JSX } from 'react'
+import { Text } from 'react-native'
+import { DepartureControllerProvider } from './DepartureController'
 import AirportPicker from './components/AirportPicker'
 import DepartureList from './components/DepartureList'
-import { DepartureControllerProvider } from './DepartureController'
 import Credit from './components/Credit'
 
 const DeparturePage = (): JSX.Element => {
   return (
-    <DepartureControllerProvider>
-      <AirportPicker />
-      <DepartureList />
-      <Credit />
-    </DepartureControllerProvider>
+    <Text style={{ fontSize: 32 }}>Hello world 👋</Text>
   )
 }
 
