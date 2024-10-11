@@ -1,5 +1,5 @@
 import { useRepository } from './data/useRepository'
-import { useEffect, useRef, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import { Airport, Departure } from './data/models'
 
 export interface DepartureController {
@@ -9,7 +9,7 @@ export interface DepartureController {
   setSelectedAirportIata: (iata: string) => void
 }
 
-export const useDepartureController = (): DepartureController => {
+const useDepartureController = (): DepartureController => {
   const repository = useRepository()
 
   const [departures, setDepartures] = useState<Departure[]>([])
@@ -26,4 +26,19 @@ export const useDepartureController = (): DepartureController => {
     selectedAirportIata,
     setSelectedAirportIata,
   }
+}
+
+const DepartureControllerContext = createContext<DepartureController | null>(null)
+
+export const useDepartureControllerContext = (): DepartureController => {
+  const context = useContext(DepartureControllerContext)
+  if (context) return context
+
+  throw Error('Could not find departure context')
+}
+
+export const DepartureControllerProvider = (props: { children: ReactNode }): JSX.Element => {
+  const controller = useDepartureController()
+
+  return <DepartureControllerContext.Provider value={controller}>{props.children}</DepartureControllerContext.Provider>
 }

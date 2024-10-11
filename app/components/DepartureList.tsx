@@ -1,15 +1,17 @@
 import { JSX, useMemo } from 'react'
-import { Departure } from '../data/models'
 import DepartureCard from '../components/DepartureCard'
 import { ScrollView, View } from 'react-native'
 import style from '../style'
+import { useDepartureControllerContext } from '../DepartureController'
 
-const DepartureList = (props: { departures: Departure[] }): JSX.Element => {
+const DepartureList = (): JSX.Element => {
+  const controller = useDepartureControllerContext()
+
   const departureItems = useMemo(() => {
-    return props.departures
+    return controller.departures
       .filter(departure => !departure.hasDeparted)
       .map((departure, index) => <DepartureCard key={index} departure={departure} />)
-  }, [props.departures])
+  }, [controller.departures])
 
   return (
     <ScrollView style={{ backgroundColor: 'grey' }}>

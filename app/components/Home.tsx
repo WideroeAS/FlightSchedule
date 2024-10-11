@@ -1,20 +1,14 @@
 import { JSX } from 'react'
 import AirportPicker from '../components/AirportPicker'
 import DepartureList from './DepartureList'
-import { useDepartureController } from '../DepartureController'
+import { DepartureControllerProvider } from '../DepartureController'
 
 const Home = (): JSX.Element => {
-  const controller = useDepartureController()
-
   return (
-    <>
-      <AirportPicker
-        airports={controller.airports}
-        selectedAirportIata={controller.selectedAirportIata}
-        setSelectedAirportIata={controller.setSelectedAirportIata}
-      />
-      <DepartureList departures={controller.departures} />
-    </>
+    <DepartureControllerProvider>
+      <AirportPicker />
+      <DepartureList />
+    </DepartureControllerProvider>
   )
 }
 
