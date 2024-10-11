@@ -16,9 +16,6 @@ export interface DepartureFlightDTO {
   gate: string // The departure airport gate number
   isOld: boolean // True when flight has departed
   scheduledTimeFull: string // Format: yyyyMMddHHmm
-
-  scheduleChanged: boolean // TODO
-  status: string | null // TODO
 }
 
 export interface Departure {
