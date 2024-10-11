@@ -1,8 +1,10 @@
-import { useRepository } from './data/useRepository'
+import { useDepartureRepository } from './data/useDepartureRepository'
 import { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import { Airport, Departure } from './data/models'
+import { withLoading } from '../utils/withLoading'
 
 export interface DepartureController {
+  loading: boolean
   departures: Departure[]
   airports: Airport[]
   selectedAirportIata: string
@@ -10,17 +12,20 @@ export interface DepartureController {
 }
 
 const useDepartureController = (): DepartureController => {
-  const repository = useRepository()
+  const repository = useDepartureRepository()
 
+  const [loading, setLoading] = useState<boolean>(false)
   const [departures, setDepartures] = useState<Departure[]>([])
   const airports = useRef<Airport[]>(repository.getAirports())
   const [selectedAirportIata, setSelectedAirportIata] = useState<string>(airports.current[0].iata)
 
   useEffect(() => {
-    repository.getDepartures(selectedAirportIata).then(setDepartures)
-  }, [selectedAirportIata, repository])
+    void withLoading(() => repository.getDepartures(selectedAirportIata).then(setDepartures), setLoading)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAirportIata])
 
   return {
+    loading,
     departures,
     airports: airports.current,
     selectedAirportIata,

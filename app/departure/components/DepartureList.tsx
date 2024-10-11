@@ -1,8 +1,9 @@
 import { JSX, useMemo } from 'react'
-import DepartureCard from '../components/DepartureCard'
+import DepartureCard from './DepartureCard'
 import { ScrollView, View } from 'react-native'
-import style from '../style'
+import style from '../../style'
 import { useDepartureControllerContext } from '../DepartureController'
+import { ActivityIndicator } from 'react-native'
 
 const DepartureList = (): JSX.Element => {
   const controller = useDepartureControllerContext()
@@ -15,6 +16,7 @@ const DepartureList = (): JSX.Element => {
 
   return (
     <ScrollView style={{ backgroundColor: 'grey' }}>
+      {controller.loading && <ActivityIndicator size={'large'} />}
       <View style={{ margin: style.space, gap: style.space }}>{departureItems}</View>
     </ScrollView>
   )

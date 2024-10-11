@@ -1,12 +1,12 @@
 import { type JSX } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Home from './components/Home'
+import DeparturePage from './departure/DeparturePage'
 
 const Stack = createNativeStackNavigator()
 
 const App = (): JSX.Element => (
   <Stack.Navigator>
-    <Stack.Screen name='Flight table' component={Home} />
+    <Stack.Screen name='Flight table' component={DeparturePage} />
   </Stack.Navigator>
 )
 export default App

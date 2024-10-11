@@ -2,12 +2,12 @@ import { Airport, Departure, DepartureFlightDTO, DeparturesDTO } from './models'
 import { DateTime } from 'luxon'
 import airports from './airports.json'
 
-export interface Repository {
+export interface DepartureRepository {
   getDepartures: (airport: string) => Promise<Departure[]>
   getAirports: () => Airport[]
 }
 
-export const useRepository = (): Repository => {
+export const useDepartureRepository = (): DepartureRepository => {
   const mapDepartureToDomain = (dto: DepartureFlightDTO): Departure => {
     return {
       airlineName: dto.airlineName,

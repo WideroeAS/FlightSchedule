@@ -1,11 +1,11 @@
 import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native'
 import { Departure } from '../data/models'
-import style from '../style'
+import style from '../../style'
 import React, { useMemo } from 'react'
 import { WithLocalSvg } from 'react-native-svg/css'
-import wfLogo from '../../assets/svg/wf.svg'
-import norwegianLogo from '../../assets/svg/norwegian.svg'
-import sasLogo from '../../assets/svg/sas.svg'
+import wfLogo from '../../../assets/svg/wf.svg'
+import norwegianLogo from '../../../assets/svg/norwegian.svg'
+import sasLogo from '../../../assets/svg/sas.svg'
 
 export default function DepartureCard(props: { departure: Departure }) {
   const departureTime = props.departure.departureDate.toFormat('HH:mm')
