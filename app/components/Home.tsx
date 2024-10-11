@@ -1,10 +1,10 @@
 import { JSX, useEffect, useMemo, useRef, useState } from 'react'
-import { Airport, Departure } from '@/app/data/models'
-import { useRepository } from '@/app/data/useRepository'
-import DepartureCard from '@/app/components/DepartureCard'
+import { Airport, Departure } from '../data/models'
+import { useRepository } from '../data/useRepository'
+import DepartureCard from '../components/DepartureCard'
 import { ScrollView, View } from 'react-native'
-import style from '@/app/style'
-import { Picker } from '@react-native-picker/picker'
+import style from '../style'
+import AirportPicker from '../components/AirportPicker'
 
 const Home = (): JSX.Element => {
   const repository = useRepository()
@@ -27,16 +27,11 @@ const Home = (): JSX.Element => {
 
   return (
     <ScrollView style={{ backgroundColor: 'grey' }}>
-      <Picker
-        style={{ backgroundColor: 'white' }}
-        mode="dropdown"
-        selectedValue={selectedAirportIata}
-        onValueChange={setSelectedAirportIata}
-      >
-        {airports.current.map(airport =>
-          <Picker.Item label={airport.name} value={airport.iata} />,
-        )}
-      </Picker>
+      <AirportPicker
+        airports={airports.current}
+        selectedAirportIata={selectedAirportIata}
+        setSelectedAirportIata={setSelectedAirportIata}
+      />
       <View style={{ margin: style.space, gap: style.space }}>
         {departureItems}
       </View>

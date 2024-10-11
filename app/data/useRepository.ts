@@ -1,6 +1,6 @@
-import { Airport, Departure, DepartureFlightDTO, DeparturesDTO } from '@/app/data/models'
+import { Airport, Departure, DepartureFlightDTO, DeparturesDTO } from './models'
 import { DateTime } from 'luxon'
-import airports from '@/app/data/airports.json'
+import airports from './airports.json'
 
 export interface Repository {
   getDepartures: (airport: string) => Promise<Departure[]>
