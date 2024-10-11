@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FlightTable",
-    "slug": "FlightTable",
+    "name": "FlightSchedule",
+    "slug": "FlightSchedule",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "myapp",
