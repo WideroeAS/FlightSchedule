@@ -1,27 +1,19 @@
-import { JSX, useEffect, useRef, useState } from 'react'
-import { Airport, Departure } from '../data/models'
-import { useRepository } from '../data/useRepository'
+import { JSX } from 'react'
 import AirportPicker from '../components/AirportPicker'
 import DepartureList from './DepartureList'
+import { useDepartureController } from '../DepartureController'
 
 const Home = (): JSX.Element => {
-  const repository = useRepository()
-  const [departures, setDepartures] = useState<Departure[]>([])
-  const airports = useRef<Airport[]>(repository.getAirports())
-  const [selectedAirportIata, setSelectedAirportIata] = useState<string>(airports.current[0].iata)
-
-  useEffect(() => {
-    repository.getDepartures(selectedAirportIata).then(setDepartures)
-  }, [selectedAirportIata, repository])
+  const controller = useDepartureController()
 
   return (
     <>
       <AirportPicker
-        airports={airports.current}
-        selectedAirportIata={selectedAirportIata}
-        setSelectedAirportIata={setSelectedAirportIata}
+        airports={controller.airports}
+        selectedAirportIata={controller.selectedAirportIata}
+        setSelectedAirportIata={controller.setSelectedAirportIata}
       />
-      <DepartureList departures={departures} />
+      <DepartureList departures={controller.departures} />
     </>
   )
 }
