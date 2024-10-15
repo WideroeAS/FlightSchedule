@@ -14,8 +14,8 @@ const DepartureList = (): JSX.Element => {
       <FlatList
         style={{ margin: style.space }}
         ItemSeparatorComponent={() => <View style={{ margin: 4 }} />}
-        data={controller.departures.filter(departure => !departure.hasDeparted)}
-        renderItem={item => <DepartureCard departure={item.item} />}
+        data={controller.departures}
+        renderItem={departure => <DepartureCard departure={departure.item} />}
       />
     </View>
   )

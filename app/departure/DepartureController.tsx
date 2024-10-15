@@ -30,7 +30,8 @@ const useDepartureController = (): DepartureController => {
       if (!selectedAirportIata) return
 
       const departures = await repository.getDepartures(selectedAirportIata)
-      setDepartures(departures)
+      const activeDepartures = departures.filter(departure => !departure.hasDeparted)
+      setDepartures(activeDepartures)
     }, setLoading)
   }, [repository, selectedAirportIata])
 
