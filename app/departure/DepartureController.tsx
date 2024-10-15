@@ -1,5 +1,5 @@
 import { useDepartureRepository } from './data/useDepartureRepository'
-import { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react'
+import { type JSX, createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { Airport, Departure } from './data/models'
 import { withLoading } from '../utils/withLoading'
 
@@ -16,18 +16,28 @@ const useDepartureController = (): DepartureController => {
 
   const [loading, setLoading] = useState<boolean>(false)
   const [departures, setDepartures] = useState<Departure[]>([])
-  const airports = useRef<Airport[]>(repository.getAirports())
-  const [selectedAirportIata, setSelectedAirportIata] = useState<string>(airports.current[0].iata)
+  const [airports, setAirports] = useState<Airport[]>([])
+  const [selectedAirportIata, setSelectedAirportIata] = useState<string>('')
 
   useEffect(() => {
-    void withLoading(() => repository.getDepartures(selectedAirportIata).then(setDepartures), setLoading)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedAirportIata])
+    const newAirports = repository.getAirports()
+    setAirports(newAirports)
+    setSelectedAirportIata(newAirports[0].iata)
+  }, [repository])
+
+  useEffect(() => {
+    void withLoading(async () => {
+      if (!selectedAirportIata) return
+
+      const departures = await repository.getDepartures(selectedAirportIata)
+      setDepartures(departures)
+    }, setLoading)
+  }, [repository, selectedAirportIata])
 
   return {
     loading,
     departures,
-    airports: airports.current,
+    airports,
     selectedAirportIata,
     setSelectedAirportIata,
   }
