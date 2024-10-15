@@ -1,14 +1,10 @@
-import { Airport, Departure, DepartureFlightDTO, DeparturesDTO } from './models'
+import { Airport, Departure, DepartureFlightDTO, DeparturesDTO } from '../models/models'
 import { DateTime } from 'luxon'
-import airports from './airports.json'
+import airports from './data/airports.json'
 import { useMemo } from 'react'
+import { DepartureRepository } from './DepartureRepository'
 
-export interface DepartureRepository {
-  getDepartures: (airport: string) => Promise<Departure[]>
-  getAirports: () => Airport[]
-}
-
-export const useDepartureRepository = (): DepartureRepository => {
+export const useOnlineDepartureRepository = (): DepartureRepository => {
   return useMemo(() => {
     const mapDepartureToDomain = (dto: DepartureFlightDTO): Departure => {
       return {

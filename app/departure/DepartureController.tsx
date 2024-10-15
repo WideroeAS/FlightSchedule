@@ -1,23 +1,23 @@
-import { useDepartureRepository } from './data/useDepartureRepository'
+import { useOnlineDepartureRepository } from './repository/useOnlineDepartureRepository'
 import { type JSX, createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { Airport, Departure } from './data/models'
+import { Airport, Departure } from './models/models'
 import { withLoading } from '../utils/withLoading'
 
 export interface DepartureController {
   loading: boolean
   departures: Departure[]
   airports: Airport[]
-  selectedAirportIata: string
+  selectedAirportIata?: string
   setSelectedAirportIata: (iata: string) => void
 }
 
 const useDepartureController = (): DepartureController => {
-  const repository = useDepartureRepository()
+  const repository = useOnlineDepartureRepository()
 
   const [loading, setLoading] = useState<boolean>(false)
   const [departures, setDepartures] = useState<Departure[]>([])
   const [airports, setAirports] = useState<Airport[]>([])
-  const [selectedAirportIata, setSelectedAirportIata] = useState<string>('')
+  const [selectedAirportIata, setSelectedAirportIata] = useState<string>()
 
   useEffect(() => {
     const newAirports = repository.getAirports()

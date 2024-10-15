@@ -1,5 +1,5 @@
 import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native'
-import { Departure } from '../data/models'
+import { Departure } from '../models/models'
 import style from '../../style'
 import React, { useMemo } from 'react'
 import { WithLocalSvg } from 'react-native-svg/css'
