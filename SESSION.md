@@ -3,6 +3,10 @@
 - Introduce the concept of the departure list
 - Ensure everyone has installed expo go and successfully launched the app
 
+## React in 3 minutes
+- What is a component?
+- The controller concept
+
 Run dev server: `npx expo start --dev-client --tunnel`
 
 ## Session plan
