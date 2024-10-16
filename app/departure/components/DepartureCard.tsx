@@ -1,6 +1,5 @@
 import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native'
 import { Departure } from '../models/models'
-import style from '../../style'
 import React, { useMemo } from 'react'
 import { WithLocalSvg } from 'react-native-svg/css'
 import wfLogo from '../../../assets/svg/wf.svg'
@@ -22,14 +21,14 @@ export default function DepartureCard(props: { departure: Departure }) {
   }, [props.departure.airlineName])
 
   return (
-    <View style={cardStyle.container}>
-      <View style={cardStyle.firstRow}>
+    <View style={style.container}>
+      <View style={style.row}>
         <Text>Departure: {departureTime}</Text>
         <Text>To: {props.departure.toAirportName}</Text>
         <Text>Gate: {props.departure.gate}</Text>
       </View>
 
-      <View style={{ ...cardStyle.secondRow }}>
+      <View style={style.row}>
         <Text>Flight: {props.departure.flightId}</Text>
         <Text>Airline: {props.departure.airlineName}</Text>
         <WithLocalSvg asset={airlineIcon as ImageSourcePropType} width={32} height={32} />
@@ -38,19 +37,16 @@ export default function DepartureCard(props: { departure: Departure }) {
   )
 }
 
-const cardStyle = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
-    ...style.card,
+    backgroundColor: 'white',
+    borderRadius: 8,
     flexDirection: 'row',
-    gap: style.space,
+    gap: 8,
     overflow: 'hidden',
   },
-  firstRow: {
+  row: {
     flex: 1,
-    padding: style.space,
-  },
-  secondRow: {
-    flex: 1,
-    padding: style.space,
+    padding: 8,
   },
 })
