@@ -22,11 +22,16 @@ export const useOnlineDepartureRepository = (): DepartureRepository => {
       }
     }
 
+    const convertToAvinorDate = (dateTime: DateTime): string => {
+      const utcDateTime = dateTime.toUTC()
+      const isoDate = utcDateTime.toISODate()
+      const time = utcDateTime.toFormat('HH:mm:ss')
+      return `${isoDate}T${time}Z`
+    }
+
     const getDepartures = async (airport: string): Promise<Departure[]> => {
-      const today = DateTime.now()
-      const yesterday = today.minus({ day: 1 })
-      const start = `${yesterday.toISODate()}T22:00:00Z`
-      const end = `${today.toISODate()}T21:59:59Z`
+      const start = convertToAvinorDate(DateTime.now().startOf('day'))
+      const end = convertToAvinorDate(DateTime.now().endOf('day'))
 
       const params = new URLSearchParams({
         direction: 'd',
@@ -40,7 +45,7 @@ export const useOnlineDepartureRepository = (): DepartureRepository => {
 
       const result = await fetch(url)
 
-      const departureResult = await result.json() as DeparturesDTO
+      const departureResult = (await result.json()) as DeparturesDTO
       return departureResult.flights.map(mapDepartureToDomain)
     }
 
