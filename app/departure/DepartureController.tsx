@@ -22,7 +22,9 @@ const useDepartureController = (): DepartureController => {
   useEffect(() => {
     const newAirports = repository.getAirports()
     setAirports(newAirports)
-    setSelectedAirportIata(newAirports[0].iata)
+
+    const defaultAirport = newAirports.find(airport => airport.iata === 'OSL')
+    setSelectedAirportIata(defaultAirport?.iata)
   }, [repository])
 
   useEffect(() => {
