@@ -1,12 +1,12 @@
 import useOfflineDepartureRepository from '../app/departure/repository/useOfflineDepartureRepository'
-import { useOnlineDepartureRepository } from '../app/departure/repository/useOnlineDepartureRepository'
 import { DepartureRepository } from '../app/departure/repository/DepartureRepository'
+import { IDepartureRepository } from '../app/departure/repository/IDepartureRepository'
 import { render } from '@testing-library/react-native'
 import { type JSX } from 'react'
 
 describe('Repository tests', () => {
-  const createInComponentBody = (repositoryFactory: () => DepartureRepository): DepartureRepository => {
-    let repository!: DepartureRepository
+  const createInComponentBody = (repositoryFactory: () => IDepartureRepository): IDepartureRepository => {
+    let repository!: IDepartureRepository
     const Component = (): JSX.Element => {
       repository = repositoryFactory()
       return <></>
@@ -18,7 +18,7 @@ describe('Repository tests', () => {
   }
 
   test('Online repository fetches departures and converts them to domain model', async () => {
-    const repository = createInComponentBody(useOnlineDepartureRepository)
+    const repository = createInComponentBody(DepartureRepository)
     const departures = await repository.getDepartures('BOO')
 
     expect(Array.isArray(departures)).toBe(true)

@@ -2,10 +2,10 @@ import airports from './data/airports.json'
 import departures from './data/departures.json'
 import { Departure } from '../models/models'
 import { DateTime } from 'luxon'
-import { DepartureRepository } from './DepartureRepository'
+import { IDepartureRepository } from './IDepartureRepository'
 import { useMemo } from 'react'
 
-const useOfflineDepartureRepository = (): DepartureRepository => {
+const useOfflineDepartureRepository = (): IDepartureRepository => {
   return useMemo(() => {
     const getDepartures = async (airport: string): Promise<Departure[]> => {
       // Random delay to simulate network request

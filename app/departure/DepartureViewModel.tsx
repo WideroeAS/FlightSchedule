@@ -1,8 +1,8 @@
-import { useOnlineDepartureRepository } from './repository/useOnlineDepartureRepository'
+import { DepartureRepository } from './repository/DepartureRepository'
 import { type JSX, createContext, ReactNode, useContext, useEffect, useState, useRef } from 'react'
 import { Airport, Departure } from './models/models'
 import { withLoading } from '../utils/withLoading'
-import { DepartureRepository } from './repository/DepartureRepository'
+import { IDepartureService, DepartureService } from './service/IDepartureService'
 
 export interface DepartureViewModel {
   loading: boolean
@@ -12,8 +12,8 @@ export interface DepartureViewModel {
   setSelectedAirportIata: (iata: string) => void
 }
 
-const useDepartureViewModel = (props: { repository: DepartureRepository }): DepartureViewModel => {
-  const { repository } = props
+const useDepartureViewModel = (props: { service: IDepartureService }): DepartureViewModel => {
+  const { service } = props
 
   const [loading, setLoading] = useState<boolean>(false)
   const [departures, setDepartures] = useState<Departure[]>([])
@@ -21,22 +21,21 @@ const useDepartureViewModel = (props: { repository: DepartureRepository }): Depa
   const [selectedAirportIata, setSelectedAirportIata] = useState<string>()
 
   useEffect(() => {
-    const newAirports = repository.getAirports()
+    const newAirports = service.getAirports()
     setAirports(newAirports)
 
-    const defaultAirport = newAirports.find(airport => airport.iata === 'OSL')
+    const defaultAirport = service.getAirport('OSL')
     setSelectedAirportIata(defaultAirport?.iata)
-  }, [repository])
+  }, [service])
 
   useEffect(() => {
-    void withLoading(async () => {
-      if (!selectedAirportIata) return
+    if (!selectedAirportIata) return
 
-      const departures = await repository.getDepartures(selectedAirportIata)
-      const activeDepartures = departures.filter(departure => !departure.hasDeparted)
-      setDepartures(activeDepartures)
+    void withLoading(async () => {
+      const departures = await service.getActiveDepartures(selectedAirportIata)
+      setDepartures(departures)
     }, setLoading)
-  }, [repository, selectedAirportIata])
+  }, [service, selectedAirportIata])
 
   return {
     loading,
@@ -57,7 +56,7 @@ export const useDepartureViewModelContext = (): DepartureViewModel => {
 }
 
 export const DepartureViewModelProvider = (props: { children: ReactNode }): JSX.Element => {
-  const repository = useRef(useOnlineDepartureRepository()).current
-  const viewModel = useDepartureViewModel({ repository })
+  const service = useRef(DepartureService({ repository: DepartureRepository() })).current
+  const viewModel = useDepartureViewModel({ service })
   return <DepartureViewModelContext.Provider value={viewModel}>{props.children}</DepartureViewModelContext.Provider>
 }
