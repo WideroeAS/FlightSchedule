@@ -1,7 +1,8 @@
 import { useOnlineDepartureRepository } from './repository/useOnlineDepartureRepository'
-import { type JSX, createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { type JSX, createContext, ReactNode, useContext, useEffect, useState, useRef } from 'react'
 import { Airport, Departure } from './models/models'
 import { withLoading } from '../utils/withLoading'
+import { DepartureRepository } from './repository/DepartureRepository'
 
 export interface DepartureViewModel {
   loading: boolean
@@ -11,8 +12,8 @@ export interface DepartureViewModel {
   setSelectedAirportIata: (iata: string) => void
 }
 
-const useDepartureViewModel = (): DepartureViewModel => {
-  const repository = useOnlineDepartureRepository()
+const useDepartureViewModel = (props: { repository: DepartureRepository }): DepartureViewModel => {
+  const { repository } = props
 
   const [loading, setLoading] = useState<boolean>(false)
   const [departures, setDepartures] = useState<Departure[]>([])
@@ -56,6 +57,7 @@ export const useDepartureViewModelContext = (): DepartureViewModel => {
 }
 
 export const DepartureViewModelProvider = (props: { children: ReactNode }): JSX.Element => {
-  const viewModel = useDepartureViewModel()
+  const repository = useRef(useOnlineDepartureRepository()).current
+  const viewModel = useDepartureViewModel({ repository })
   return <DepartureViewModelContext.Provider value={viewModel}>{props.children}</DepartureViewModelContext.Provider>
 }
