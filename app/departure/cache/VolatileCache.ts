@@ -17,7 +17,6 @@ export const VolatileCache = <V>(config: { entryValidityInSeconds: number }): Ca
       const entryAgeInSeconds = entry.timestamp.diffNow(['seconds']).toObject().seconds
       if (!entryAgeInSeconds) return undefined
 
-      console.log('entry age', entryAgeInSeconds)
       return Math.abs(entryAgeInSeconds) > config.entryValidityInSeconds ? undefined : entry.value
     },
   }
