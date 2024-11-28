@@ -10,7 +10,7 @@ const AirportPicker = (): JSX.Element => {
       style={{ backgroundColor: 'white' }}
       mode='dropdown'
       selectedValue={viewModel.selectedAirportIata}
-      onValueChange={viewModel.setSelectedAirportIata}
+      onValueChange={viewModel.onAirportIataChanged}
     >
       {viewModel.airports.map((airport, index) => (
         <Picker.Item key={index} label={airport.name} value={airport.iata} />

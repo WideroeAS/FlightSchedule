@@ -2,7 +2,7 @@ import { Airport, Departure } from '../models/models'
 import { IDepartureRepository } from '../repository/IDepartureRepository'
 
 export interface IDepartureService {
-  getActiveDepartures: (airport: string) => Promise<Departure[]>
+  getActiveDepartures: (iata: string) => Promise<Departure[]>
   getAirports: () => Airport[]
   getAirport: (iata: string) => Airport | undefined
 }

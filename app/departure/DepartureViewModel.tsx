@@ -9,7 +9,7 @@ export interface DepartureViewModel {
   departures: Departure[]
   airports: Airport[]
   selectedAirportIata?: string
-  setSelectedAirportIata: (iata: string) => void
+  onAirportIataChanged: (iata: string) => void
   onRefresh: () => void
 }
 
@@ -45,7 +45,7 @@ const useDepartureViewModel = (props: { service: IDepartureService }): Departure
     departures,
     airports,
     selectedAirportIata,
-    setSelectedAirportIata,
+    onAirportIataChanged: setSelectedAirportIata,
     onRefresh: getDepartures,
   }
 }
