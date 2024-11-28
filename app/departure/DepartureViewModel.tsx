@@ -1,5 +1,5 @@
 import { DepartureRepository } from './repository/DepartureRepository'
-import { type JSX, createContext, ReactNode, useContext, useEffect, useState, useRef } from 'react'
+import { type JSX, createContext, ReactNode, useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { Airport, Departure } from './models/models'
 import { withLoading } from '../utils/withLoading'
 import { IDepartureService, DepartureService } from './service/IDepartureService'
@@ -10,6 +10,7 @@ export interface DepartureViewModel {
   airports: Airport[]
   selectedAirportIata?: string
   setSelectedAirportIata: (iata: string) => void
+  onRefresh: () => void
 }
 
 const useDepartureViewModel = (props: { service: IDepartureService }): DepartureViewModel => {
@@ -28,7 +29,7 @@ const useDepartureViewModel = (props: { service: IDepartureService }): Departure
     setSelectedAirportIata(defaultAirport?.iata)
   }, [service])
 
-  useEffect(() => {
+  const getDepartures = useCallback(() => {
     if (!selectedAirportIata) return
 
     void withLoading(async () => {
@@ -37,12 +38,15 @@ const useDepartureViewModel = (props: { service: IDepartureService }): Departure
     }, setLoading)
   }, [service, selectedAirportIata])
 
+  useEffect(getDepartures, [getDepartures])
+
   return {
     loading,
     departures,
     airports,
     selectedAirportIata,
     setSelectedAirportIata,
+    onRefresh: getDepartures,
   }
 }
 

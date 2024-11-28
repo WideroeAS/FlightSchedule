@@ -4,7 +4,7 @@ import DepartureList from './components/DepartureList'
 import { DepartureViewModelProvider } from './DepartureViewModel'
 import Credit from './components/Credit'
 
-const DeparturePage = (): JSX.Element => {
+const DepartureScreen = (): JSX.Element => {
   return (
     <DepartureViewModelProvider>
       <AirportPicker />
@@ -14,4 +14,4 @@ const DeparturePage = (): JSX.Element => {
   )
 }
 
-export default DeparturePage
+export default DepartureScreen
