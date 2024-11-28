@@ -1,18 +1,18 @@
 import { JSX } from 'react'
 import { Picker } from '@react-native-picker/picker'
-import { useDepartureControllerContext } from '../DepartureController'
+import { useDepartureViewModelContext } from '../DepartureViewModel'
 
 const AirportPicker = (): JSX.Element => {
-  const controller = useDepartureControllerContext()
+  const viewModel = useDepartureViewModelContext()
 
   return (
     <Picker
       style={{ backgroundColor: 'white' }}
       mode='dropdown'
-      selectedValue={controller.selectedAirportIata}
-      onValueChange={controller.setSelectedAirportIata}
+      selectedValue={viewModel.selectedAirportIata}
+      onValueChange={viewModel.setSelectedAirportIata}
     >
-      {controller.airports.map((airport, index) => (
+      {viewModel.airports.map((airport, index) => (
         <Picker.Item key={index} label={airport.name} value={airport.iata} />
       ))}
     </Picker>

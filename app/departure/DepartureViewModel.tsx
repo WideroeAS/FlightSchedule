@@ -3,7 +3,7 @@ import { type JSX, createContext, ReactNode, useContext, useEffect, useState } f
 import { Airport, Departure } from './models/models'
 import { withLoading } from '../utils/withLoading'
 
-export interface DepartureController {
+export interface DepartureViewModel {
   loading: boolean
   departures: Departure[]
   airports: Airport[]
@@ -11,7 +11,7 @@ export interface DepartureController {
   setSelectedAirportIata: (iata: string) => void
 }
 
-const useDepartureController = (): DepartureController => {
+const useDepartureViewModel = (): DepartureViewModel => {
   const repository = useOnlineDepartureRepository()
 
   const [loading, setLoading] = useState<boolean>(false)
@@ -46,17 +46,16 @@ const useDepartureController = (): DepartureController => {
   }
 }
 
-const DepartureControllerContext = createContext<DepartureController | null>(null)
+const DepartureViewModelContext = createContext<DepartureViewModel | null>(null)
 
-export const useDepartureControllerContext = (): DepartureController => {
-  const context = useContext(DepartureControllerContext)
+export const useDepartureViewModelContext = (): DepartureViewModel => {
+  const context = useContext(DepartureViewModelContext)
   if (context) return context
 
-  throw Error('Could not find departure context')
+  throw Error('Could not find departure view model in context')
 }
 
-export const DepartureControllerProvider = (props: { children: ReactNode }): JSX.Element => {
-  const controller = useDepartureController()
-
-  return <DepartureControllerContext.Provider value={controller}>{props.children}</DepartureControllerContext.Provider>
+export const DepartureViewModelProvider = (props: { children: ReactNode }): JSX.Element => {
+  const viewModel = useDepartureViewModel()
+  return <DepartureViewModelContext.Provider value={viewModel}>{props.children}</DepartureViewModelContext.Provider>
 }

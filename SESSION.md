@@ -5,7 +5,7 @@
 
 ## React in 3 minutes
 - What is a component?
-- The controller concept
+- The view model concept
 
 Run dev server: `npx expo start --dev-client --tunnel`
 
