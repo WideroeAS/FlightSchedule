@@ -1,8 +1,9 @@
 import { DepartureRepository } from './repository/DepartureRepository'
-import { type JSX, createContext, ReactNode, useContext, useEffect, useState, useRef, useCallback } from 'react'
+import { createContext, type JSX, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { Airport, Departure } from './models/models'
 import { withLoading } from '../utils/withLoading'
-import { IDepartureService, DepartureService } from './service/IDepartureService'
+import { DepartureService, IDepartureService } from './service/IDepartureService'
+import { VolatileCache } from './cache/VolatileCache'
 
 export interface DepartureViewModel {
   loading: boolean
@@ -59,8 +60,12 @@ export const useDepartureViewModelContext = (): DepartureViewModel => {
   throw Error('Could not find departure view model in context')
 }
 
+const service = DepartureService({
+  departureService: DepartureRepository(),
+  departureCache: VolatileCache<Departure[]>({ entryValidityInSeconds: 60 }),
+})
+
 export const DepartureViewModelProvider = (props: { children: ReactNode }): JSX.Element => {
-  const service = useRef(DepartureService({ repository: DepartureRepository() })).current
   const viewModel = useDepartureViewModel({ service })
   return <DepartureViewModelContext.Provider value={viewModel}>{props.children}</DepartureViewModelContext.Provider>
 }

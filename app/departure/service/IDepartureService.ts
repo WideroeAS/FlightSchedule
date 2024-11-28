@@ -1,5 +1,6 @@
 import { Airport, Departure } from '../models/models'
 import { IDepartureRepository } from '../repository/IDepartureRepository'
+import { Cache } from '../cache/VolatileCache'
 
 export interface IDepartureService {
   getActiveDepartures: (iata: string) => Promise<Departure[]>
@@ -7,20 +8,29 @@ export interface IDepartureService {
   getAirport: (iata: string) => Airport | undefined
 }
 
-export const DepartureService = (props: { repository: IDepartureRepository }): IDepartureService => {
-  const { repository } = props
+export const DepartureService = (props: {
+  departureService: IDepartureRepository,
+  departureCache: Cache<Departure[]>,
+}): IDepartureService => {
+  const { departureService, departureCache } = props
 
-  const getActiveDepartures = async (airport: string): Promise<Departure[]> => {
-    const departures = await repository.getDepartures(airport)
-    return departures.filter(departure => !departure.hasDeparted)
+  const getActiveDepartures = async (iata: string): Promise<Departure[]> => {
+    const cachedDepartures = departureCache.get(iata)
+    if (cachedDepartures) return cachedDepartures
+
+    const departures = await departureService.getDepartures(iata)
+    const activeDepartures = departures.filter(departure => !departure.hasDeparted)
+    departureCache.set(iata, activeDepartures)
+
+    return activeDepartures
   }
 
   const getAirports = (): Airport[] => {
-    return repository.getAirports()
+    return departureService.getAirports()
   }
 
   const getAirport = (iata: string): Airport | undefined => {
-    return repository.getAirports().find(airport => airport.iata = iata)
+    return departureService.getAirports().find(airport => airport.iata = iata)
   }
 
   return {
