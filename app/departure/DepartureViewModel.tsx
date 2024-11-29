@@ -61,7 +61,7 @@ export const useDepartureViewModelContext = (): DepartureViewModel => {
 }
 
 const service = DepartureService({
-  departureService: DepartureRepository(),
+  departureRepository: DepartureRepository(),
   departureCache: VolatileCache<Departure[]>({ entryValidityInSeconds: 60 }),
 })
 

@@ -9,16 +9,16 @@ export interface IDepartureService {
 }
 
 export const DepartureService = (props: {
-  departureService: IDepartureRepository,
+  departureRepository: IDepartureRepository,
   departureCache: Cache<Departure[]>,
 }): IDepartureService => {
-  const { departureService, departureCache } = props
+  const { departureRepository, departureCache } = props
 
   const getActiveDepartures = async (iata: string): Promise<Departure[]> => {
     const cachedDepartures = departureCache.get(iata)
     if (cachedDepartures) return cachedDepartures
 
-    const departures = await departureService.getDepartures(iata)
+    const departures = await departureRepository.getDepartures(iata)
     const activeDepartures = departures.filter(departure => !departure.hasDeparted)
     departureCache.set(iata, activeDepartures)
 
@@ -26,11 +26,11 @@ export const DepartureService = (props: {
   }
 
   const getAirports = (): Airport[] => {
-    return departureService.getAirports()
+    return departureRepository.getAirports()
   }
 
   const getAirport = (iata: string): Airport | undefined => {
-    return departureService.getAirports().find(airport => airport.iata = iata)
+    return departureRepository.getAirports().find(airport => airport.iata = iata)
   }
 
   return {
